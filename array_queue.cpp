@@ -3,7 +3,7 @@
 using namespace std;
 
 struct queueRecord;
-typedef int elementType
+typedef int elementType;
 typedef struct queueRecord *queue;
 
 int isEmpty(queue Q);
