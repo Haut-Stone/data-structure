@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-03-23 20:04:15
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-03-27 22:46:57
+* @Last Modified time: 2017-04-06 13:41:07
 */
 #include <iostream>
 #include <cstdio>
@@ -16,21 +16,23 @@
 #include <cstring>
 #include <map>
 #include <vector>
+
 #define TRUE 1
 #define FALSE 0
 #define OK 1
 #define ERROR 0
 #define INFEASIBLE -1
 #define OVERFLOWW -2//提示这个已经定义过了
+
 typedef int Status;
 typedef int Elemtype;
 using namespace std;
 
 const int N = 1000;
 
-#if 1
+#if 1 //线性表
 
-//线性表
+
 typedef struct Node
 {
     int a[N];
@@ -61,5 +63,11 @@ void initList2(List *L)
 {
     L->length = 2;
 }
+
+#endif
+
+#if 1
+    
+
 
 #endif
