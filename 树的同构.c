@@ -13,7 +13,7 @@ int Isomorphic(int root1, int root2);
 
 int main(int argc, char const *argv[])
 {
-    int root1, root2
+    int root1, root2;
     root1 = BuildTree(T1);
     root2 = BuildTree(T2);
     if(Isomorphic(root1, root2)){
