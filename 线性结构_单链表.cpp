@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-06 12:38:31
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-06 13:59:48
+* @Last Modified time: 2017-04-06 22:00:29
 */
 #include <algorithm>
 #include <iostream>
@@ -38,10 +38,10 @@ typedef struct Node
 }ListNode;
 
 
-void initList();//建立新表
-void destroyList();//破坏一个表
+
+void initList(ListNode *L);//建立新表
 void ClearList();//将一个表重置
-void isEmpty();//返回一个表是不是空表
+bool isEmpty();//返回一个表是不是空表
 void listLength();//返回表的长度
 Elemtype getElement(ListNode *L, int i);//取得某一位置的元素
 void deleteValue(ListNode *L, Elemtype value);//删除值等于某个数的第一个节点
@@ -50,12 +50,17 @@ void priorElement();//返回上一个元素
 void nextElement();//返回后一个元素
 void insertElement(ListNode *L, int i, Elemtype value);//在表中某位置前插入元素
 Elemtype deleteElement(ListNode *L, int i);//删除表中某位置的元素,并返回该被删元素的值
+ListNode* mergeTowList(ListNode *La, ListNode *Lb);//合并两个链表
+void displayList(ListNode *L);//输出链表的值
+ListNode* reversalList(ListNode *L);//将链表逆置
 void listTraverse();//遍历？
-ListNode* mergeTowList(ListNode *La, ListNode *Lb);
 
 int main(void)
 {
-
+	ListNode *head;
+	head = new ListNode;
+	head->next = NULL;
+	initList(head);
     return 0;
 }
 
@@ -157,4 +162,56 @@ void insertElement(ListNode *L, int i, Elemtype value)
 		solo->next = temp->next;
 		temp->next = solo;
 	}
+}
+
+void initList(ListNode *L)
+{
+	int n;
+	Elemtype value;
+	cout<<"请输入初始化链表的长度 n =";
+	cin>>n;
+	ListNode *temp, *solo;
+	temp = L;
+	cout<<"请输入链表个节点的值,以空格隔开"<<endl;
+	while(n--){
+		cin>>value;
+		solo = new ListNode;
+		solo->value = value;
+		solo->next = NULL;
+		temp->next = solo;
+		temp = solo;
+	}
+}
+
+void displayList(ListNode *L)
+{
+	ListNode *now;
+	now = L->next;
+	if(isEmpty()){
+		cout<<"这个表是空表"<<endl;;
+	}else{
+		while(now != NULL){
+			cout<<now->value<<" ";
+			now = now->next;
+		}
+		cout<<endl;
+	}
+}
+
+ListNode* reversalList(ListNode *L)
+{
+	ListNode *prior, *next, *current;//用三个指针来反转链表
+	prior = L;
+	current = L->next;
+	next = current->next;
+	prior->next = NULL;
+	while(next->next != NULL){
+		current->next = prior;
+		prior = current;
+		current = next;
+		next = next->next;
+	}
+	current->next = prior;
+	next->next = current;
+	return next;
 }
