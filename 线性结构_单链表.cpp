@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-06 12:38:31
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-06 22:00:29
+* @Last Modified time: 2017-04-13 21:37:42
 */
 #include <algorithm>
 #include <iostream>
@@ -20,12 +20,11 @@
 #include <map>
 #include <set>
 
-#define TRUE 1
-#define FALSE 0
 #define OK 1
 #define ERROR -1
 #define INFEASIBLE -1
 #define OVERFLOWW -2//提示这个已经定义过了
+#define INPUT_TEST freopen("in.txt", "r", stdin)
 
 typedef int Status;
 typedef int Elemtype;
@@ -38,30 +37,110 @@ typedef struct Node
 }ListNode;
 
 
-
+bool isEmpty(ListNode *L);//返回一个表是不是空表
 void initList(ListNode *L);//建立新表
-void ClearList();//将一个表重置
-bool isEmpty();//返回一个表是不是空表
-void listLength();//返回表的长度
-Elemtype getElement(ListNode *L, int i);//取得某一位置的元素
+void ClearList(ListNode *L);//将一个表重置
+int listLength(ListNode *L);//返回表的长度
 void deleteValue(ListNode *L, Elemtype value);//删除值等于某个数的第一个节点
-void locateElement();//找到符合某一条件的首元素的位置
-void priorElement();//返回上一个元素
-void nextElement();//返回后一个元素
+// void locateElement();//找到符合某一条件的首元素的位置
+// void priorElement();//返回上一个元素
+// void nextElement();//返回后一个元素
 void insertElement(ListNode *L, int i, Elemtype value);//在表中某位置前插入元素
+void displayList(ListNode *L);//输出链表的值
+void reversalList(ListNode *L);//将链表逆置
+Elemtype getElement(ListNode *L, int i);//取得某一位置的元素
 Elemtype deleteElement(ListNode *L, int i);//删除表中某位置的元素,并返回该被删元素的值
 ListNode* mergeTowList(ListNode *La, ListNode *Lb);//合并两个链表
-void displayList(ListNode *L);//输出链表的值
-ListNode* reversalList(ListNode *L);//将链表逆置
-void listTraverse();//遍历？
 
 int main(void)
 {
+	INPUT_TEST;
+
 	ListNode *head;
 	head = new ListNode;
 	head->next = NULL;
+
 	initList(head);
+	cout<<"读入数据后"<<endl;
+	displayList(head);
+	deleteElement(head, 3);
+	cout<<"删除一个数据后"<<endl;
+	displayList(head);
+	insertElement(head, 10, 5);
+	cout<<"插入一个数据后"<<endl;
+	displayList(head);
+	deleteValue(head, 10);
+	cout<<"删除第一个符合条件的数据后"<<endl;
+	displayList(head);
+	reversalList(head);
+	cout<<"反转链表后"<<endl;
+	displayList(head);
+	cout<<"单链表的长度是"<<listLength(head)<<endl;
+	ClearList(head);
+	cout<<"清空链表后"<<endl;
+	displayList(head);
+	
+	ListNode *headA, *headB, *headC;
+	headA = new ListNode;
+	headA->next = NULL;
+	headB = new ListNode;
+	headB->next = NULL;
+
+	initList(headA);
+	initList(headB);
+	headC = mergeTowList(headA, headB);
+	cout<<"合并两个链表后"<<endl;
+	displayList(headC);
     return 0;
+}
+
+bool isEmpty(ListNode *L)
+{
+	ListNode *temp;
+	temp = L->next;
+	if(temp == NULL){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+void initList(ListNode *L)
+{
+	int n;
+	Elemtype value;
+	// cout<<"请输入初始化链表的长度 n =";
+	cin>>n;
+	ListNode *temp, *solo;
+	temp = L;
+	// cout<<"请输入链表个节点的值,以空格隔开"<<endl;
+	while(n--){
+		cin>>value;
+		solo = new ListNode;
+		solo->value = value;
+		solo->next = NULL;
+		temp->next = solo;
+		temp = solo;
+	}
+}
+
+void ClearList(ListNode *L)
+{
+	while(L->next != NULL){
+		deleteElement(L, 1);
+	}
+}
+
+int listLength(ListNode *L)
+{
+	int ans = 0;
+	ListNode *temp;
+	temp = L->next;
+	while(temp != NULL){
+		ans++;
+		temp = temp->next;
+	}
+	return ans;
 }
 
 Elemtype getElement(ListNode *L, int i)
@@ -96,7 +175,7 @@ Elemtype deleteElement(ListNode *L, int i)
 		temp2 = temp1->next;
 		value = temp2->value;
 		temp1->next = temp2->next;
-		delete(temp2);
+		delete temp2;
 		return value;
 	}
 }
@@ -141,7 +220,7 @@ ListNode* mergeTowList(ListNode *La, ListNode *Lb)
 	}else{
 		posC->next = posB;
 	}
-	delete(Lb);
+	delete Lb;
 	return Lc;
 }
 
@@ -164,30 +243,11 @@ void insertElement(ListNode *L, int i, Elemtype value)
 	}
 }
 
-void initList(ListNode *L)
-{
-	int n;
-	Elemtype value;
-	cout<<"请输入初始化链表的长度 n =";
-	cin>>n;
-	ListNode *temp, *solo;
-	temp = L;
-	cout<<"请输入链表个节点的值,以空格隔开"<<endl;
-	while(n--){
-		cin>>value;
-		solo = new ListNode;
-		solo->value = value;
-		solo->next = NULL;
-		temp->next = solo;
-		temp = solo;
-	}
-}
-
 void displayList(ListNode *L)
 {
 	ListNode *now;
 	now = L->next;
-	if(isEmpty()){
+	if(now == NULL){
 		cout<<"这个表是空表"<<endl;;
 	}else{
 		while(now != NULL){
@@ -198,20 +258,30 @@ void displayList(ListNode *L)
 	}
 }
 
-ListNode* reversalList(ListNode *L)
+void reversalList(ListNode *L)
 {
 	ListNode *prior, *next, *current;//用三个指针来反转链表
 	prior = L;
 	current = L->next;
+	if(current == NULL) return;//没有元素时直接返回
 	next = current->next;
+	if(next == NULL) return;//只有一个元素时也直接返回
 	prior->next = NULL;
 	while(next->next != NULL){
-		current->next = prior;
+		if(prior != L){
+			current->next = prior;
+		}else{
+			current->next = NULL;
+		}
 		prior = current;
 		current = next;
 		next = next->next;
 	}
-	current->next = prior;
+	if(prior != L){
+		current->next = prior;
+	}else{
+		current->next = NULL;
+	}
 	next->next = current;
-	return next;
+	L->next = next;
 }

@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-10 12:18:04
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-10 21:37:32
+* @Last Modified time: 2017-04-13 22:00:06
 */
 
 //用循环队列来提高数组的空间的利用效率
@@ -26,8 +26,6 @@
 using namespace std;
 
 #define INPUT_TEST freopen("in.txt", "r", stdin)
-#define TRUE 1
-#define FALSE 0
 #define OK 1
 #define ERROR 0
 #define INFEASIBLE -1
@@ -46,13 +44,13 @@ typedef struct Node
 }Queue;
 
 
+bool isEmpty(Queue &Q);//判断栈是否是空的
+int queueLength(Queue &Q);//返循环队列的长度
 void initQueue(Queue &Q);//初始化循环队列
 void destroyQueue();
 void clearQueue();
-bool isEmpty(Queue &Q);//判断栈是否是空的
-int queueLength(Queue &Q);//返循环队列的长度
-Elemtype getHead(Queue &Q);//取得队头元素
 void enQueue(Queue &Q, Elemtype value);//入队一个元素
+Elemtype getHead(Queue &Q);//取得队头元素
 Elemtype deQueue(Queue &Q);//出队一个元素，并返回该元素的值
 
 
@@ -63,6 +61,9 @@ int main(void)
 	initQueue(Q);
 	enQueue(Q, 20);
 	enQueue(Q, 10);
+	enQueue(Q, 402);
+	int ans = queueLength(Q);
+	printf("队列的长度是%d\n", ans);
 	deQueue(Q);
 	printf("%d\n", Q.a[Q.front]);
     return 0;

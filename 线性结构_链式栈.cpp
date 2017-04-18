@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-06 21:27:16
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-06 22:06:43
+* @Last Modified time: 2017-04-13 22:08:02
 */
 #include <algorithm>
 #include <iostream>
@@ -21,8 +21,6 @@
 #include <set>
 using namespace std;
 
-#define TRUE 1
-#define FALSE 0
 #define OK 1
 #define ERROR 0
 #define INFEASIBLE -1
@@ -40,8 +38,8 @@ typedef struct Node
 
 StackNode* initStack();//构造一个空栈
 void createStack(StackNode *top);//初始化栈中数据
-void destroyStack();//销毁一个栈
-void clearStack();//将一个栈清空
+// void destroyStack();//销毁一个栈
+// void clearStack();//将一个栈清空
 bool isEmpty(StackNode *top);//判断是不是空栈
 int stackLength(StackNode *top);//返回栈的长度
 Elemtype getTop(StackNode *top);//取得栈的顶部元素
@@ -53,6 +51,15 @@ int main(void)
 {
 	StackNode *top;
 	top = initStack();
+	createStack(top);
+	push(top, 10);
+	push(top, 30);
+	push(top, 40);
+	displayTheStack(top);
+	pop(top);
+	displayTheStack(top);
+	int ans = stackLength(top);
+	printf("栈中的元素个数为%d\n", ans);
     return 0;
 }
 
@@ -61,6 +68,7 @@ StackNode* initStack()
 	StackNode *top;
 	top = new StackNode;
 	top->next = NULL;
+
 	return top;
 }
 
@@ -68,7 +76,7 @@ void createStack(StackNode *top)
 {
 	StackNode *solo;;
 	int n;
-	cout<<"请输入初始化的元素个数 n =";
+	cout<<"请输入初始化的元素个数 n = ";
 	cin>>n;
 	cout<<endl<<"请依次输入各元素"<<endl;
 	for(int i=0;i<n;i++){
@@ -141,7 +149,7 @@ int stackLength(StackNode *top)
 		return 0;
 	}else{
 		temp = top->next;
-		cnt = 1;
+		cnt = 0;
 		while(temp!=NULL){
 			cnt++;
 			temp = temp->next;
