@@ -7,21 +7,14 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-18 13:14:35
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-18 15:56:35
+* @Last Modified time: 2017-04-21 14:00:32
 */
-#include <algorithm>
-#include <iostream>
-#include <cstring>
-#include <vector>
-#include <cstdio>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <map>
-#include <set>
-using namespace std;
 
-#define INPUT_TEST freopen("in.txt", "r", stdin)
+//链式前向星实现：（数据规模较小时速度比不上邻接矩阵）
+
+
+#include <iostream>
+using namespace std;
 
 const int N = 100;//之前要调成题目要求的大小
 
@@ -30,7 +23,7 @@ struct Node
 	int next;
 	int to;
 	int w;//有权值的话，这一句启用
-}edges[N];
+}edge[N*N];
 
 int head[N];
 int cnt;
@@ -38,17 +31,26 @@ int beginX;
 
 void add(int u, int v, int w)//存一条以u为起点,v为终点,w为边权值的有向边。
 {
-	edges[cnt].w = w;
-	edges[cnt].to = v;
-	edges[cnt].next = head[u];
+	edge[cnt].w = w;
+	edge[cnt].to = v;
+	edge[cnt].next = head[u];
 	head[u] = cnt;
 	cnt++;
 }
 
+void init()
+{
+	cnt = 0;
+	memset(head, -1, sizeof(head));
+	memset(edge, 0, sizeof(edge));
+}
+
 int main(void)
 {
-	for(int i=head[beginX];~i;i=edges[i].next){
-		//遍历过程
+	int u = beginX;
+	for(int i=head[u];~i;i=edge[i].next){
+		// int v = edge[i].to;//语法糖
+		// int w = edge[i].w;
 	}
     return 0;
 }
