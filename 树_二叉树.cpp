@@ -1,5 +1,5 @@
-#include<iostream>
-#include<cstdio>
+#include <iostream>
+#include <cstdio>
 #define ERROR -1
 #define OK 1
 using namespace std;

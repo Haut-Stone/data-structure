@@ -7,23 +7,14 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-06 12:37:57
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-13 20:41:34
+* @Last Modified time: 2017-05-16 11:43:04
 */
-#include <algorithm>
 #include <iostream>
 #include <cstring>
-#include <vector>
 #include <cstdio>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <map>
-#include <set>
 
 #define OK 1
 #define ERROR -1
-#define INFEASIBLE -1
-#define OVERFLOWW -2//提示这个已经定义过了
 #define INPUT_TEST freopen("in.txt", "r", stdin)
 
 typedef int Status;
@@ -99,10 +90,10 @@ void initList(List &L)
 {	
 	int n;
 	L.length = 0;
-	// cout<<"乖乖输入表的长度噢！ n = ";
+	cout<<"乖乖输入表的长度噢！ n = ";
 	cin>>n;
 		L.length = n;
-		// cout<<"请逐个输入表中的元素,以空格隔开"<<endl;
+		cout<<"请逐个输入表中的元素,以空格隔开"<<endl;
 		for(int i=0;i<n;i++){
 			cin>>L.a[i];
 		}

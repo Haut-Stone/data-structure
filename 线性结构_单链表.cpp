@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-06 12:38:31
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-13 21:37:42
+* @Last Modified time: 2017-05-16 12:12:20
 */
 #include <algorithm>
 #include <iostream>
@@ -54,30 +54,30 @@ ListNode* mergeTowList(ListNode *La, ListNode *Lb);//合并两个链表
 
 int main(void)
 {
-	INPUT_TEST;
+	// INPUT_TEST;
 
 	ListNode *head;
 	head = new ListNode;
 	head->next = NULL;
 
 	initList(head);
-	cout<<"读入数据后"<<endl;
+	cout<<"读入数据后: "<<endl;
 	displayList(head);
 	deleteElement(head, 3);
-	cout<<"删除一个数据后"<<endl;
+	cout<<"删除第三个数据后: "<<endl;
 	displayList(head);
 	insertElement(head, 10, 5);
-	cout<<"插入一个数据后"<<endl;
+	cout<<"在位置10插入5后: "<<endl;
 	displayList(head);
 	deleteValue(head, 10);
-	cout<<"删除第一个符合条件的数据后"<<endl;
+	cout<<"删除第一个等于10的数据后: "<<endl;
 	displayList(head);
 	reversalList(head);
-	cout<<"反转链表后"<<endl;
+	cout<<"反转链表后: "<<endl;
 	displayList(head);
-	cout<<"单链表的长度是"<<listLength(head)<<endl;
+	cout<<"单链表的长度是: "<<listLength(head)<<endl;
 	ClearList(head);
-	cout<<"清空链表后"<<endl;
+	cout<<"清空链表后: "<<endl;
 	displayList(head);
 	
 	ListNode *headA, *headB, *headC;
@@ -86,10 +86,12 @@ int main(void)
 	headB = new ListNode;
 	headB->next = NULL;
 
+	cout<<"输入表a的信息: "<<endl;
 	initList(headA);
+	cout<<"输入表b的信息: "<<endl;
 	initList(headB);
 	headC = mergeTowList(headA, headB);
-	cout<<"合并两个链表后"<<endl;
+	cout<<"合并两个链表后: "<<endl;
 	displayList(headC);
     return 0;
 }
@@ -109,11 +111,11 @@ void initList(ListNode *L)
 {
 	int n;
 	Elemtype value;
-	// cout<<"请输入初始化链表的长度 n =";
+	cout<<"请输入初始化链表的长度 n =";
 	cin>>n;
 	ListNode *temp, *solo;
 	temp = L;
-	// cout<<"请输入链表个节点的值,以空格隔开"<<endl;
+	cout<<"请输入链表个节点的值,以空格隔开"<<endl;
 	while(n--){
 		cin>>value;
 		solo = new ListNode;
