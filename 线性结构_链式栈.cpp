@@ -7,18 +7,11 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-06 21:27:16
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-13 22:08:02
+* @Last Modified time: 2017-05-22 22:08:48
 */
 #include <algorithm>
 #include <iostream>
-#include <cstring>
-#include <vector>
-#include <cstdio>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <map>
-#include <set>
+
 using namespace std;
 
 #define OK 1
