@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-05-16 16:25:36
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-05-16 16:53:47
+* @Last Modified time: 2017-05-30 21:02:01
 */
 
 //输入数据的格式是 字母个数 + 每个字母的权值 
@@ -32,6 +32,8 @@ const int INF = 99999999;
 
 int n;
 int weight[N];
+char inStr[N];
+char inCode[N];
 char huffmanCode[N][N];
 
 struct Node
@@ -42,12 +44,11 @@ struct Node
 	int lChild;
 	int rChild;
 	int vis;
-}vexter[N];
+}vertex[N];
 
 void huffmanCoding();
-void strToCode();
-void codeToStr();
-
+void strToCode(char inStr[], int len);
+void codeToStr(char inCode[], int len);
 int main(void)
 {
 	INPUT_TEST;
@@ -63,15 +64,23 @@ int main(void)
 		cout<<temp<<": "<<huffmanCode[i]<<endl;
 		temp++;
 	}
+	printf("please input the string:\n");
+    scanf("%s", inStr);
+    int len = strlen(inStr);
+    strToCode(inStr, len);
+    printf("please input the Code:\n");
+    scanf("%s", inCode);
+    len = strlen(inCode);
+    codeToStr(inCode, len);
 	return 0;
 }
 
 void huffmanCoding()
 {
-	memset(vexter, 0, sizeof(vexter));
+	memset(vertex, 0, sizeof(vertex));
 	for(int i=1;i<=n;i++){
-		vexter[i].weight = weight[i];
-		vexter[i].id = i;
+		vertex[i].weight = weight[i];
+		vertex[i].id = i;
 	}
 	int m = n*2-1;
 	
@@ -82,32 +91,32 @@ void huffmanCoding()
 		int id1 = 0;
 		int id2 = 0;
 		for(int i=1;i<=k-1;i++){
-			if(vexter[i].vis == 0){
-				if(vexter[i].weight < min2){
-					if(vexter[i].weight < min1){
+			if(vertex[i].vis == 0){
+				if(vertex[i].weight < min2){
+					if(vertex[i].weight < min1){
 						min2 = min1;
 						id2 = id1;
-						min1 = vexter[i].weight;
+						min1 = vertex[i].weight;
 						id1 = i;
 					}else{
-						min2 = vexter[i].weight;
+						min2 = vertex[i].weight;
 						id2 = i;
 					}
 				}
 			}
 		}
-		vexter[id1].parent = k;
-		vexter[id2].parent = k;
-		vexter[id1].vis = 1;
-		vexter[id2].vis = 1;
-		vexter[k].lChild = id1;
-		vexter[k].rChild = id2;
-		vexter[k].id = k;
-		vexter[k].weight = min1 + min2;
+		vertex[id1].parent = k;
+		vertex[id2].parent = k;
+		vertex[id1].vis = 1;
+		vertex[id2].vis = 1;
+		vertex[k].lChild = id1;
+		vertex[k].rChild = id2;
+		vertex[k].id = k;
+		vertex[k].weight = min1 + min2;
 	}
 	
 	// for(int i=1;i<=m;i++){
-	// 	cout<<vexter[i].weight<<vexter[i].parent<<vexter[i].lChild<<vexter[i].rChild<<vexter[i].id<<endl;
+	// 	cout<<vertex[i].weight<<vertex[i].parent<<vertex[i].lChild<<vertex[i].rChild<<vertex[i].id<<endl;
 	// }
 	
 	//编码部分
@@ -117,26 +126,49 @@ void huffmanCoding()
 	for(int i=1;i<=n;i++){
 		int start = n-1;
 		int now = i;
-		int father = vexter[i].parent;
+		int father = vertex[i].parent;
 		while(father != 0){
-			if(vexter[father].lChild == now){
+			if(vertex[father].lChild == now){
 				code[--start] = '0';
 			}else{
 				code[--start] = '1';
 			}
 			now = father;
-			father = vexter[father].parent;
+			father = vertex[father].parent;
 		}
 		strcpy(huffmanCode[i], &code[start]);
 	}
 }
 
-void strToCode()
+void strToCode(char inStr[], int len)
 {
-
+    for(int i=0;i<len;i++){
+        printf("%s", huffmanCode[inStr[i] - 'a' + 1]);
+    }
+    printf("\n");
+    return;
 }
 
-void codeToStr()
+void codeToStr(char inCode[], int len)
 {
+    int mapLen;
+    int first = 0;
 
+    while(first < len){
+        for(int i=1;i<=n;i++){
+            mapLen = strlen(huffmanCode[i]);
+            char temp[N];
+            for(int i=0;i<mapLen;i++){
+                temp[i] = inCode[first + i];
+                temp[i+1] = '\0';
+            }
+            if(strcmp(temp, huffmanCode[i]) == 0){
+                printf("%c",'a' + i - 1);
+                first += mapLen;
+                break;
+            }
+        }
+    }
+    printf("\n");
 }
+
