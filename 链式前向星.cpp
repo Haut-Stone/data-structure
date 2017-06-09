@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-04-18 13:14:35
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-04-21 14:00:32
+* @Last Modified time: 2017-06-07 20:20:31
 */
 
 //链式前向星实现：（数据规模较小时速度比不上邻接矩阵）
@@ -16,14 +16,14 @@
 #include <iostream>
 using namespace std;
 
-const int N = 100;//之前要调成题目要求的大小
+const int N = 200010;//之前要调成题目要求的大小
 
 struct Node
 {
 	int next;
 	int to;
-	int w;//有权值的话，这一句启用
-}edge[N*N];
+	// int w;//有权值的话，这一句启用
+}edge[N*10];
 
 int head[N];
 int cnt;
@@ -31,11 +31,10 @@ int beginX;
 
 void add(int u, int v, int w)//存一条以u为起点,v为终点,w为边权值的有向边。
 {
-	edge[cnt].w = w;
+	// edge[cnt].w = w;
 	edge[cnt].to = v;
 	edge[cnt].next = head[u];
-	head[u] = cnt;
-	cnt++;
+	head[u] = cnt++;
 }
 
 void init()
