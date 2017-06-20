@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-06-19 15:28:13
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-06-20 21:52:08
+* @Last Modified time: 2017-06-20 22:29:55
 */
 
 
@@ -46,6 +46,14 @@
 #define WERITE_CODE freopen("CodeFile.txt", "w", stdout)
 #define WERITE_TEXT freopen("TextFile.txt", "w", stdout)
 #define WERITE_TREE freopen("TreePrint.txt", "w", stdout)
+// #define READ_CODE freopen("/Users/li/GitHub/data-structure/期末课程设计/CodeFile.txt", "r", stdin)
+// #define READ_TEXT freopen("/Users/li/GitHub/data-structure/期末课程设计/ToBeTran.txt", "r", stdin)
+// #define READ_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/hfmTree.txt", "r", stdin)
+// #define INPUT_TEST freopen("/Users/li/GitHub/data-structure/期末课程设计/in.txt", "r", stdin)
+// #define OUTPUT_TEST freopen("/Users/li/GitHub/data-structure/期末课程设计/out.txt", "w", stdout)
+// #define WERITE_CODE freopen("/Users/li/GitHub/data-structure/期末课程设计/CodeFile.txt", "w", stdout)
+// #define WERITE_TEXT freopen("/Users/li/GitHub/data-structure/期末课程设计/TextFile.txt", "w", stdout)
+// #define WERITE_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/TreePrint.txt", "w", stdout)
 using namespace std;
 
 struct Node
@@ -72,6 +80,7 @@ struct Node
 void iReadFromConsole();//with powerful check function
 void readFromFile();
 void huffmanCoding();
+bool FileCheck();
 void aTob();//ascli to binary
 void bToa();//binary to ascil
 void probabilityStatistics();
@@ -86,23 +95,59 @@ priority_queue<int> priorityQueue;
 
 int main(void)
 {
-	READ_WEIGHT;
-	
-	//TODO
-	// cout<<"HELLO!"<<endl;
-	// cout<<"would like input the data from file or console?"<<endl<<"1:console, 2:file"<<endl;
-	
-	
-	iReadFromConsole();
-	huffmanCoding();
-	showHuffmanCodeInConsole();
+	INPUT_TEST;
+	int command = 0;
+	cout<<"HELLO!"<<endl;
+	cout<<"would like input the data from file or console?"<<endl;
+
+	while(command <= 0){
+		cout<<"1:console, 2:file"<<endl;
+		cin>>command;
+		cin.clear();
+		cin.ignore(1024, '\n');//忽略回车和回车前的1024个字符
+		if(command <= 0) cout<<"WARNING: The input num must be 1 or 2"<<endl;
+	}
 
 	
+	if(command == 1){
+		iReadFromConsole();
+	}else{
+		readFromFile();
+	}
+
+	huffmanCoding();
+	showHuffmanCodeInConsole();
 	aTob();
 	bToa();
 	OUTPUT_TEST;
 	printf("YES\n");
 	return 0;
+}
+
+void readFromFile()
+{
+	READ_WEIGHT;
+	if(!FileCheck()){
+
+	}
+
+	char tempChar;
+	double tempValue;
+	char format;
+
+	cin>>aNum;
+	getchar();
+	for(int i=1;i<=aNum;i++){
+		scanf("%c", &tempChar);
+		cin>>format>>tempValue;
+		cin.ignore(1024, '\n');
+		dic[tempChar] = tempValue;
+	}
+}
+
+bool FileCheck()
+{
+	return true;
 }
 
 void iReadFromConsole()
