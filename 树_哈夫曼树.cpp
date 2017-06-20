@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-05-16 16:25:36
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-05-30 21:02:01
+* @Last Modified time: 2017-06-20 19:17:31
 */
 
 //输入数据的格式是 字母个数 + 每个字母的权值 
@@ -65,13 +65,13 @@ int main(void)
 		temp++;
 	}
 	printf("please input the string:\n");
-    scanf("%s", inStr);
-    int len = strlen(inStr);
-    strToCode(inStr, len);
-    printf("please input the Code:\n");
-    scanf("%s", inCode);
-    len = strlen(inCode);
-    codeToStr(inCode, len);
+	scanf("%s", inStr);
+	int len = strlen(inStr);
+	strToCode(inStr, len);
+	printf("please input the Code:\n");
+	scanf("%s", inCode);
+	len = strlen(inCode);
+	codeToStr(inCode, len);
 	return 0;
 }
 
