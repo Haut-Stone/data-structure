@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-06-19 15:28:13
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-06-20 22:29:55
+* @Last Modified time: 2017-06-21 10:14:18
 */
 
 
@@ -41,16 +41,20 @@
 #define READ_CODE freopen("CodeFile.txt", "r", stdin)
 #define READ_TEXT freopen("ToBeTran.txt", "r", stdin)
 #define READ_WEIGHT freopen("hfmTree.txt", "r", stdin)
+#define READ_CONSOLE fclose(stdin)
 #define INPUT_TEST freopen("in.txt", "r", stdin)
 #define OUTPUT_TEST freopen("out.txt", "w", stdout)
+#define WERITE_WEIGHT freopen("hfmTree.txt", "w", stdout)
 #define WERITE_CODE freopen("CodeFile.txt", "w", stdout)
 #define WERITE_TEXT freopen("TextFile.txt", "w", stdout)
 #define WERITE_TREE freopen("TreePrint.txt", "w", stdout)
+#define WERITE_CONSOLE fclose(stdout)
 // #define READ_CODE freopen("/Users/li/GitHub/data-structure/期末课程设计/CodeFile.txt", "r", stdin)
 // #define READ_TEXT freopen("/Users/li/GitHub/data-structure/期末课程设计/ToBeTran.txt", "r", stdin)
 // #define READ_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/hfmTree.txt", "r", stdin)
 // #define INPUT_TEST freopen("/Users/li/GitHub/data-structure/期末课程设计/in.txt", "r", stdin)
 // #define OUTPUT_TEST freopen("/Users/li/GitHub/data-structure/期末课程设计/out.txt", "w", stdout)
+// #define WERITE_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/hfmTree.txt", "w", stdout)
 // #define WERITE_CODE freopen("/Users/li/GitHub/data-structure/期末课程设计/CodeFile.txt", "w", stdout)
 // #define WERITE_TEXT freopen("/Users/li/GitHub/data-structure/期末课程设计/TextFile.txt", "w", stdout)
 // #define WERITE_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/TreePrint.txt", "w", stdout)
@@ -112,6 +116,7 @@ int main(void)
 	if(command == 1){
 		iReadFromConsole();
 	}else{
+		probabilityStatistics();
 		readFromFile();
 	}
 
@@ -275,6 +280,7 @@ void huffmanCoding()
 
 void showHuffmanCodeInConsole()
 {
+	WERITE_TREE;
 	for(map<char, string>::iterator it = huffmanCode.begin();it!=huffmanCode.end();it++){
 		if(it->first == '\n'){
 			cout<<"\\n: "<<it->second<<endl;
@@ -340,4 +346,34 @@ void bToa()
 		}
 	}
 	cout<<endl;
+}
+
+void probabilityStatistics()
+{
+	READ_TEXT;
+	WERITE_WEIGHT;
+
+	char solo;
+	int cnt = 0;
+	int row[300];
+	memset(row, 0, sizeof(row));
+
+	while(scanf("%c", &solo) != EOF){
+		cnt++;
+		row[int(solo)]++;
+	}
+
+	int anotherCnt = 0;
+	for(int i=32;i<=126;i++){
+		if(row[i] != 0) anotherCnt++;
+	}
+	if(row[10] != 0) anotherCnt++;
+
+	cout<<anotherCnt<<endl;
+	for(int i=32;i<=126;i++){
+		if(row[i] != 0){
+			cout<<char(i)<<':'<<double(row[i])/cnt<<endl;
+		}
+	}
+	if(row[10] != 0) cout<<endl<<':'<<double(row[10])/cnt<<endl;
 }

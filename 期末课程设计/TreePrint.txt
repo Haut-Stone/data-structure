@@ -1,0 +1,3 @@
+\n: 0
+a: 1
+please input the string
