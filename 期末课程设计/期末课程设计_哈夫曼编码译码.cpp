@@ -7,57 +7,38 @@
 * @Author: Haut-Stone
 * @Date:   2017-06-19 15:28:13
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-06-21 10:14:18
+* @Last Modified time: 2017-06-21 16:00:50
 */
-
-
-/*
-		要求有以下这么几个：
-		1.从终端读入字母的种类个数N，之后是n个字符n个权值。（包括空格和换行）建立哈夫曼树并保存于文件中。
-		2.从文件中导入哈夫曼树，并对文章的正文进行编码，然后保存。
-		3.从文件中导入哈夫曼树，并对编码进行翻译，让后保存。
-		4.以紧凑格式将编码在终端打印出来，每行50个代码，同时将此字符形式的编码文件写入文件。
-		5.在终端上显示具有树形结构的哈夫曼树。（很有用）
-		
-		6.对文件的错误输入进行检查。
-		7.统计进行编码的时间。
-		8.将这个项目做成以个库。
-*/
-
 #include <algorithm>
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <stdlib.h>
 #include <cstdio>
 #include <queue>
 #include <stack>
 #include <cmath>
 #include <map>
 #include <set>
-#define NULLVALUE 0
 #define N 1000
 #define INF 99999999
 #define ture true
-#define READ_CODE freopen("CodeFile.txt", "r", stdin)
-#define READ_TEXT freopen("ToBeTran.txt", "r", stdin)
-#define READ_WEIGHT freopen("hfmTree.txt", "r", stdin)
-#define READ_CONSOLE fclose(stdin)
-#define INPUT_TEST freopen("in.txt", "r", stdin)
-#define OUTPUT_TEST freopen("out.txt", "w", stdout)
-#define WERITE_WEIGHT freopen("hfmTree.txt", "w", stdout)
-#define WERITE_CODE freopen("CodeFile.txt", "w", stdout)
-#define WERITE_TEXT freopen("TextFile.txt", "w", stdout)
-#define WERITE_TREE freopen("TreePrint.txt", "w", stdout)
-#define WERITE_CONSOLE fclose(stdout)
-// #define READ_CODE freopen("/Users/li/GitHub/data-structure/期末课程设计/CodeFile.txt", "r", stdin)
-// #define READ_TEXT freopen("/Users/li/GitHub/data-structure/期末课程设计/ToBeTran.txt", "r", stdin)
-// #define READ_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/hfmTree.txt", "r", stdin)
-// #define INPUT_TEST freopen("/Users/li/GitHub/data-structure/期末课程设计/in.txt", "r", stdin)
-// #define OUTPUT_TEST freopen("/Users/li/GitHub/data-structure/期末课程设计/out.txt", "w", stdout)
-// #define WERITE_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/hfmTree.txt", "w", stdout)
-// #define WERITE_CODE freopen("/Users/li/GitHub/data-structure/期末课程设计/CodeFile.txt", "w", stdout)
-// #define WERITE_TEXT freopen("/Users/li/GitHub/data-structure/期末课程设计/TextFile.txt", "w", stdout)
-// #define WERITE_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/TreePrint.txt", "w", stdout)
+#define READ_ASCLL freopen("/Users/li/GitHub/data-structure/期末课程设计/ascll.txt", "r", stdin)
+#define READ_CONSOLEIN freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleIn.txt", "r", stdin)
+#define READ_CONSOLEOUT freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleOut.txt", "r", stdin)
+#define READ_HUFFMANCODE freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCode.txt", "r", stdin)
+#define READ_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/tree.txt", "r", stdin)
+#define READ_WAITFORTRAN freopen("/Users/li/GitHub/data-structure/期末课程设计/waitForTran.txt", "r", stdin)
+#define READ_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/weight.txt", "r", stdin)
+#define READ_HUFFMANCODEPRINT freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCodePrint.txt", "r", stdin)
+#define WERITE_ASCLL freopen("/Users/li/GitHub/data-structure/期末课程设计/ascll.txt", "w", stdout)
+#define WERITE_CONSOLEIN freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleIn.txt", "w", stdout)
+#define WERITE_CONSOLEOUT freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleOut.txt", "w", stdout)
+#define WERITE_HUFFMANCODE freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCode.txt", "w", stdout)
+#define WERITE_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/tree.txt", "w", stdout)
+#define WERITE_WAITFORTRAN freopen("/Users/li/GitHub/data-structure/期末课程设计/waitForTran.txt", "w", stdout)
+#define WERITE_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/weight.txt", "w", stdout)
+#define WERITE_HUFFMANCODEPRINT freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCodePrint.txt", "w", stdout)
 using namespace std;
 
 struct Node
@@ -69,38 +50,31 @@ struct Node
 	int lChild;
 	int rChild;
 	int vis;
-	// Node();
-	// Node(int ID, char VALUE, double WEIGHT, int PARENT, int LCHILD, int RCHILD, int VIS){
-	// 	id = ID;
-	// 	value = VALUE;
-	// 	weight = WEIGHT;
-	// 	parent = PARENT;
-	// 	lChild = LCHILD;
-	// 	rChild = RCHILD;
-	// 	vis = VIS;
-	// }
 }huffmanNode[N];
  
-void iReadFromConsole();//with powerful check function
-void readFromFile();
+void readFromConsole();//with powerful check function
 void huffmanCoding();
-bool FileCheck();
-void aTob();//ascli to binary
-void bToa();//binary to ascil
+void aTob();//ascll to binary
+void bToa();//binary to ascll
+void readFromFile();
+void extract();
+void compress();
+void saveTree(int allNodeNumber);
 void probabilityStatistics();
-void showTheTreeInConsole();
+void showTheTreeInConsoleAndSaveIt();
+void showTheCodeInConsoloAndSaveIt();
 void showHuffmanCodeInConsole();
 
 int aNum;
+int command;
 map<char, string> huffmanCode;
 map<char, double> dic;
-priority_queue<int> priorityQueue;
 
+int main(void){
 
-int main(void)
-{
-	INPUT_TEST;
-	int command = 0;
+	READ_CONSOLEIN;
+	WERITE_CONSOLEOUT;
+
 	cout<<"HELLO!"<<endl;
 	cout<<"would like input the data from file or console?"<<endl;
 
@@ -109,12 +83,11 @@ int main(void)
 		cin>>command;
 		cin.clear();
 		cin.ignore(1024, '\n');//忽略回车和回车前的1024个字符
-		if(command <= 0) cout<<"WARNING: The input num must be 1 or 2"<<endl;
+		if(command <= 0 || command > 2) cout<<"WARNING: The input num must be 1 or 2"<<endl;
 	}
 
-	
 	if(command == 1){
-		iReadFromConsole();
+		readFromConsole();
 	}else{
 		probabilityStatistics();
 		readFromFile();
@@ -124,17 +97,14 @@ int main(void)
 	showHuffmanCodeInConsole();
 	aTob();
 	bToa();
-	OUTPUT_TEST;
-	printf("YES\n");
+	showTheCodeInConsoloAndSaveIt();
+	// showTheTreeInConsoleAndSaveIt();
 	return 0;
 }
+void readFromFile(){
 
-void readFromFile()
-{
 	READ_WEIGHT;
-	if(!FileCheck()){
-
-	}
+	WERITE_CONSOLEOUT;
 
 	char tempChar;
 	double tempValue;
@@ -149,15 +119,8 @@ void readFromFile()
 		dic[tempChar] = tempValue;
 	}
 }
-
-bool FileCheck()
-{
-	return true;
-}
-
-void iReadFromConsole()
-{
-	aNum = NULLVALUE;
+void readFromConsole(){
+	aNum = 0;
 
 	while(aNum <= 0){
 		cout<<"Please input the aNum = ";
@@ -171,7 +134,7 @@ void iReadFromConsole()
 	char format;
 
 	cout<<"there are totally "<<aNum<<" cases"<<endl;
-	cout<<"Please input each ascil with value with a format like a:54"<<endl;
+	cout<<"Please input each ascll with value with a format like a:54"<<endl;
 	for(int i=1;i<=aNum;i++){
 		cout<<"case "<<i<<" = ";
 		while(1){
@@ -180,7 +143,7 @@ void iReadFromConsole()
 
 			for(map<char, double>::iterator it = dic.begin();it!=dic.end();it++){
 				if(it->first == tempChar){
-					cout<<"Tiis ascli have been joined, try another."<<endl;
+					cout<<"Tiis ascll have been joined, try another."<<endl;
 					cout<<"case "<<i<<" = ";
 					cin.ignore(1024,'\n');
 					continue;
@@ -210,9 +173,9 @@ void iReadFromConsole()
 	}
 	return;
 }
-
-void huffmanCoding()
-{	
+void huffmanCoding(){
+	READ_CONSOLEIN;
+	WERITE_CONSOLEOUT;
 	//现在有了存在map里的数据
 	memset(huffmanNode, 0, sizeof(huffmanNode));
 	int cnt = 1;
@@ -255,6 +218,7 @@ void huffmanCoding()
 		huffmanNode[k].rChild = id2;
 	}
 
+	saveTree(allNodeNumber);
 	//编码
 	char soloCode[N];
 	soloCode[cnt-1] = '\0';
@@ -277,10 +241,10 @@ void huffmanCoding()
 		huffmanCode[nowValue] = temp;
 	}
 }
+void showHuffmanCodeInConsole(){
+	READ_CONSOLEIN;
+	WERITE_CONSOLEOUT;
 
-void showHuffmanCodeInConsole()
-{
-	WERITE_TREE;
 	for(map<char, string>::iterator it = huffmanCode.begin();it!=huffmanCode.end();it++){
 		if(it->first == '\n'){
 			cout<<"\\n: "<<it->second<<endl;
@@ -289,23 +253,19 @@ void showHuffmanCodeInConsole()
 		}
 	}
 }
-
-void aTob()
-{
-	READ_TEXT;
+void aTob(){
+	READ_WAITFORTRAN;
+	WERITE_HUFFMANCODE;
 
 	char inChar;
-	cout<<"please input the string"<<endl;
-	WERITE_CODE;
+	if(command == 1) cout<<"please input the string"<<endl;
 	while(scanf("%c", &inChar) != EOF){
 		cout<<huffmanCode[inChar];
 	}	
 }
-
-void bToa()
-{
-	OUTPUT_TEST;
-	READ_CODE;
+void bToa(){
+	READ_HUFFMANCODE;
+	WERITE_CONSOLEOUT;
 
 	char inCode[999999];
 	int len;
@@ -325,11 +285,10 @@ void bToa()
 		break;
 	}
 	
-
 	int mapLen;
 	int first = 0;
 	
-	WERITE_TEXT;
+	WERITE_ASCLL;
 	while(first < len){
 		for(map<char, string>::iterator it = huffmanCode.begin();it!=huffmanCode.end();it++){
 			mapLen = it->second.length();
@@ -347,10 +306,8 @@ void bToa()
 	}
 	cout<<endl;
 }
-
-void probabilityStatistics()
-{
-	READ_TEXT;
+void probabilityStatistics(){
+	READ_WAITFORTRAN;
 	WERITE_WEIGHT;
 
 	char solo;
@@ -377,3 +334,37 @@ void probabilityStatistics()
 	}
 	if(row[10] != 0) cout<<endl<<':'<<double(row[10])/cnt<<endl;
 }
+void saveTree(int allNodeNumber){
+	FILE *hfmTree;
+	hfmTree = fopen("hfmTree", "wb");
+	fwrite(huffmanNode+1, sizeof(Node), allNodeNumber, hfmTree);
+	fclose(hfmTree);
+}
+void showTheCodeInConsoloAndSaveIt(){
+	READ_HUFFMANCODE;
+	WERITE_CONSOLEOUT;
+
+	FILE *huffmanCodePrint;
+	huffmanCodePrint = fopen("huffmanCodePrint.txt", "w");
+
+	int cnt = 0;
+	char solo;
+	while(scanf("%c", &solo) != EOF){
+		printf("%c", solo);
+		fprintf(huffmanCodePrint, "%c", solo);
+		cnt++;
+		if(cnt >= 50){
+			printf("\n");
+			fprintf(huffmanCodePrint, "\n");
+			cnt = 0;
+		}
+	}
+	fclose(huffmanCodePrint);
+}
+// void showTheTreeInConsoleAndSaveIt(){
+// 	READ_CONSOLEIN;
+// 	WERITE_CONSOLEOUT;
+
+// 	int level = 0;
+	
+// }
