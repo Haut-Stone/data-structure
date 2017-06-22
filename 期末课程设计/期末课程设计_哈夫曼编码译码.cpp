@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-06-19 15:28:13
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-06-21 21:54:55
+* @Last Modified time: 2017-06-21 22:45:14
 */
 
 #include <algorithm>
@@ -81,7 +81,7 @@ void aTob();//ascll to binary
 void bToa();//binary to ascll
 void readFromFile();
 void extract();
-void compress();
+int compress();//返回添加的补码的个数
 void saveTree(int allNodeNumber);//save structer.
 void probabilityStatistics();//analysis the content
 void showTheTreeInConsole(int NodeId);
@@ -132,6 +132,7 @@ int main(void){
 	compress();
 	return 0;
 }
+
 void readFromFile(){
 
 	READ_WEIGHT;
@@ -150,6 +151,7 @@ void readFromFile(){
 		dic[tempChar] = tempValue;
 	}
 }
+
 void readFromConsole(){
 	READ_CONSOLEIN;
 	WERITE_CONSOLEOUT;
@@ -207,6 +209,7 @@ void readFromConsole(){
 	}
 	return;
 }
+
 int huffmanCoding(){
 	READ_CONSOLEIN;
 	WERITE_CONSOLEOUT;
@@ -276,6 +279,7 @@ int huffmanCoding(){
 	}
 	return allNodeNumber;
 }
+
 void showHuffmanCodeInConsole(){
 	READ_CONSOLEIN;
 	WERITE_CONSOLEOUT;
@@ -288,6 +292,7 @@ void showHuffmanCodeInConsole(){
 		}
 	}
 }
+
 void aTob(){
 	READ_WAITFORTRAN;
 	WERITE_HUFFMANCODE;
@@ -298,6 +303,7 @@ void aTob(){
 		cout<<huffmanCode[inChar];
 	}	
 }
+
 void bToa(){
 	READ_HUFFMANCODE;
 	WERITE_CONSOLEOUT;
@@ -341,6 +347,7 @@ void bToa(){
 	}
 	cout<<endl;
 }
+
 void probabilityStatistics(){
 	READ_WAITFORTRAN;
 	WERITE_WEIGHT;
@@ -369,12 +376,14 @@ void probabilityStatistics(){
 	}
 	if(row[10] != 0) cout<<endl<<':'<<double(row[10])/cnt<<endl;
 }
+
 void saveTree(int allNodeNumber){
 	FILE *hfmTree;
 	hfmTree = fopen("hfmTree", "wb");
 	fwrite(huffmanNode+1, sizeof(Node), allNodeNumber, hfmTree);
 	fclose(hfmTree);
 }
+
 void showTheCodeInConsoloAndSaveIt(){
 	READ_HUFFMANCODE;
 	WERITE_CONSOLEOUT;
@@ -451,7 +460,7 @@ void saveTheTreeConstruct()
 	}
 }
 
-void compress()
+int compress()
 {
 	READ_HUFFMANCODE;
 	WERITE_CONSOLEOUT;
@@ -460,6 +469,7 @@ void compress()
 	char temp;
 	int cnt = 0;
 	int ans = 0;
+	int res = 0;
 
 	FILE *code;
 	code = fopen("huffmanCode", "wb");
@@ -477,6 +487,7 @@ void compress()
     }
     
    	if(cnt != 0){
+   		res = cnt;
         while(cnt <=8){
         	ans = ans * 2;
         	cnt++;
@@ -486,4 +497,9 @@ void compress()
         fwrite(&solo, sizeof(unsigned char), 1, code);
     }
     fclose(code);
+    return res;
+}
+
+void extract(){
+	//这里解码的原理和编码是一样的。
 }
