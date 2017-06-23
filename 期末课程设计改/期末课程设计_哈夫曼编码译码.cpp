@@ -7,7 +7,7 @@
 * @Author: Haut-Stone
 * @Date:   2017-06-19 15:28:13
 * @Last Modified by:   Haut-Stone
-* @Last Modified time: 2017-06-21 22:45:14
+* @Last Modified time: 2017-06-22 22:58:36
 */
 
 #include <algorithm>
@@ -24,22 +24,22 @@
 #define N 1000
 #define INF 99999999
 #define ture true
-#define READ_ASCLL freopen("/Users/li/GitHub/data-structure/期末课程设计/ascll.txt", "r", stdin)
-#define READ_CONSOLEIN freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleIn.txt", "r", stdin)
-#define READ_CONSOLEOUT freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleOut.txt", "r", stdin)
-#define READ_HUFFMANCODE freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCode.txt", "r", stdin)
-#define READ_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/tree.txt", "r", stdin)
-#define READ_WAITFORTRAN freopen("/Users/li/GitHub/data-structure/期末课程设计/waitForTran.txt", "r", stdin)
-#define READ_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/weight.txt", "r", stdin)
-#define READ_HUFFMANCODEPRINT freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCodePrint.txt", "r", stdin)
-#define WERITE_ASCLL freopen("/Users/li/GitHub/data-structure/期末课程设计/ascll.txt", "w", stdout)
-#define WERITE_CONSOLEIN freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleIn.txt", "w", stdout)
-#define WERITE_CONSOLEOUT freopen("/Users/li/GitHub/data-structure/期末课程设计/consoleOut.txt", "w", stdout)
-#define WERITE_HUFFMANCODE freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCode.txt", "w", stdout)
-#define WERITE_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计/tree.txt", "w", stdout)
-#define WERITE_WAITFORTRAN freopen("/Users/li/GitHub/data-structure/期末课程设计/waitForTran.txt", "w", stdout)
-#define WERITE_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计/weight.txt", "w", stdout)
-#define WERITE_HUFFMANCODEPRINT freopen("/Users/li/GitHub/data-structure/期末课程设计/huffmanCodePrint.txt", "w", stdout)
+#define READ_ASCLL freopen("/Users/li/GitHub/data-structure/期末课程设计改/ascll.txt", "r", stdin)
+#define READ_CONSOLEIN freopen("/Users/li/GitHub/data-structure/期末课程设计改/consoleIn.txt", "r", stdin)
+#define READ_CONSOLEOUT freopen("/Users/li/GitHub/data-structure/期末课程设计改/consoleOut.txt", "r", stdin)
+#define READ_HUFFMANCODE freopen("/Users/li/GitHub/data-structure/期末课程设计改/huffmanCode.txt", "r", stdin)
+#define READ_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计改/tree.txt", "r", stdin)
+#define READ_WAITFORTRAN freopen("/Users/li/GitHub/data-structure/期末课程设计改/waitForTran.txt", "r", stdin)
+#define READ_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计改/weight.txt", "r", stdin)
+#define READ_HUFFMANCODEPRINT freopen("/Users/li/GitHub/data-structure/期末课程设计改/huffmanCodePrint.txt", "r", stdin)
+#define WERITE_ASCLL freopen("/Users/li/GitHub/data-structure/期末课程设计改/ascll.txt", "w", stdout)
+#define WERITE_CONSOLEIN freopen("/Users/li/GitHub/data-structure/期末课程设计改/consoleIn.txt", "w", stdout)
+#define WERITE_CONSOLEOUT freopen("/Users/li/GitHub/data-structure/期末课程设计改/consoleOut.txt", "w", stdout)
+#define WERITE_HUFFMANCODE freopen("/Users/li/GitHub/data-structure/期末课程设计改/huffmanCode.txt", "w", stdout)
+#define WERITE_TREE freopen("/Users/li/GitHub/data-structure/期末课程设计改/tree.txt", "w", stdout)
+#define WERITE_WAITFORTRAN freopen("/Users/li/GitHub/data-structure/期末课程设计改/waitForTran.txt", "w", stdout)
+#define WERITE_WEIGHT freopen("/Users/li/GitHub/data-structure/期末课程设计改/weight.txt", "w", stdout)
+#define WERITE_HUFFMANCODEPRINT freopen("/Users/li/GitHub/data-structure/期末课程设计改/huffmanCodePrint.txt", "w", stdout)
 using namespace std;
 
 struct Node
